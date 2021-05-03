@@ -1,0 +1,251 @@
+.container {
+  min-width: 320px;
+  max-width: var(--desktop-width);
+  margin: 0 auto;
+  padding: 50px 29px 87px 29px;
+
+  outline: 1px solid lightblue;
+}
+
+.title {
+  margin-bottom: 34px;
+
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 36px;
+}
+
+.calculation {
+  display: grid;
+
+  grid-template-columns: 61% 39%;
+}
+
+.wrapper {
+  width: 87%;
+  margin-bottom: 56px;
+}
+
+.select {
+  width: 100%;
+  margin-bottom: 37px !important;
+}
+
+.option {
+  padding: 21px 26px px 20px;
+}
+
+span[class="ant-select-selection-item"] {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 16px;
+}
+
+.deposit {
+  font-size: 18px;
+  line-height: 18px;
+}
+
+.range {
+  position: relative;
+
+  margin-bottom: 24px;
+}
+
+.legend {
+  position: relative;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.legendTitle {
+  line-height: 18px;
+}
+
+.legendValue {
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 18px;
+}
+
+.extraInfo {
+  position: absolute;
+  top: 0;
+  right: -44px;
+
+  width: 24px;
+  height: 24px;
+
+  background-color: var(--background_blue-gray-light);
+  background-image: url("data:image/svg+xml,%3Csvg width='7' height='12' viewBox='0 0 7 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2.44043 8.19727C2.44954 7.65495 2.51107 7.22656 2.625 6.91211C2.73893 6.59766 2.97135 6.24902 3.32227 5.86621L4.21777 4.94336C4.60059 4.51042 4.79199 4.04557 4.79199 3.54883C4.79199 3.07031 4.66667 2.69661 4.41602 2.42773C4.16536 2.1543 3.80078 2.01758 3.32227 2.01758C2.85742 2.01758 2.48372 2.14062 2.20117 2.38672C1.91862 2.63281 1.77734 2.96322 1.77734 3.37793H0.512695C0.52181 2.63965 0.783854 2.04492 1.29883 1.59375C1.81836 1.13802 2.49284 0.910156 3.32227 0.910156C4.18359 0.910156 4.85352 1.14258 5.33203 1.60742C5.8151 2.06771 6.05664 2.70117 6.05664 3.50781C6.05664 4.30534 5.6875 5.09147 4.94922 5.86621L4.2041 6.60449C3.87142 6.97363 3.70508 7.50456 3.70508 8.19727H2.44043ZM2.38574 10.3643C2.38574 10.1592 2.44727 9.98828 2.57031 9.85156C2.69792 9.71029 2.88477 9.63965 3.13086 9.63965C3.37695 9.63965 3.5638 9.71029 3.69141 9.85156C3.81901 9.98828 3.88281 10.1592 3.88281 10.3643C3.88281 10.5693 3.81901 10.7402 3.69141 10.877C3.5638 11.0091 3.37695 11.0752 3.13086 11.0752C2.88477 11.0752 2.69792 11.0091 2.57031 10.877C2.44727 10.7402 2.38574 10.5693 2.38574 10.3643Z' fill='%231272AE'/%3E%3C/svg%3E%0A");
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.extraInfo:hover .tooltip {
+  visibility: visible;
+
+  transition: visibility 1s ease-in-out;
+  display: block;
+}
+
+.tooltip {
+  position: absolute;
+  top: -15px;
+  left: 52px;
+
+  width: 226px;
+  height: 102px;
+  padding: 15px 23px;
+
+  background-color: var(--background_white);
+  border: 1px solid var(--background_blue-gray-light);
+  border-radius: 8px;
+  box-shadow: 0 5px 21px rgba(0, 0, 0, 0.1);
+  visibility: hidden;
+
+  transition: visibility 1s ease-in-out;
+  display: none;
+}
+
+.tooltip::before {
+  content: "";
+  position: absolute;
+  top: 20px;
+  left: -8px;
+
+  width: 0;
+  height: 0;
+
+  border-top: 7px solid transparent;
+  border-right: 8px solid var(--background_white);
+  border-bottom: 7px solid transparent;
+}
+
+.tooltipTitle {
+  display: block;
+  margin-bottom: 10px;
+
+  font-size: 18px;
+  line-height: 22px;
+}
+
+.tooltipText {
+  font-size: 14px;
+}
+
+.depositParameters {
+  display: flex;
+  justify-content: space-between;
+}
+
+.parametrName {
+  display: block;
+  margin-bottom: 5px;
+
+  font-size: 14px;
+  line-height: 17px;
+  color: var(--text_gray);
+}
+
+.parametrValue {
+  display: block;
+
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 36px;
+}
+
+.info {
+  padding-left: 43px;
+}
+
+.depositImage {
+  width: 87.78%;
+  height: auto;
+  margin-bottom: 70px;
+
+  box-shadow: 0 9px 21px 2px rgba(60, 72, 104, 0.2);
+}
+
+.infoText {
+  position: relative;
+
+  padding: 12px 27px 12px 58px;
+
+  font-size: 14px;
+  color: var(--text_gray-light);
+
+  border: 1px solid var(--border-blue-light);
+  border-radius: 3px;
+}
+
+.infoText::before {
+  content: "";
+  position: absolute;
+  top: 12px;
+  left: 12px;
+
+  width: 21px;
+  height: 21px;
+
+  background-image: url("data:image/svg+xml,%3Csvg width='21' height='21' viewBox='0 0 21 21' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M0 10.5C0 4.70101 4.70101 0 10.5 0C16.299 0 21 4.70102 21 10.5C21 16.299 16.299 21 10.5 21C4.70102 21 0 16.299 0 10.5ZM10.5 2.1C5.86081 2.1 2.1 5.86081 2.1 10.5C2.1 15.1392 5.86081 18.9 10.5 18.9C15.1392 18.9 18.9 15.1392 18.9 10.5C18.9 5.86081 15.1392 2.1 10.5 2.1Z' fill='%2387B9D7'/%3E%3Cpath d='M11.9 8.85003L10.4 14.05C10.3 14.35 10.3 14.55 10.3 14.65C10.3 14.75 10.3 14.75 10.4 14.75C10.5 14.75 10.5 14.85 10.5 14.85C10.6 14.85 10.7 14.85 10.7 14.75C10.9001 14.55 11.2 14.25 11.5 13.75L11.7 13.85C11 15.15 10.2 15.75 9.40002 15.75C9.10004 15.75 8.80005 15.65 8.69999 15.45C8.49996 15.25 8.4 15.05 8.4 14.75C8.4 14.55 8.4 14.35 8.49996 14.05L9.49998 10.55C9.60005 10.35 9.70001 10.15 9.70001 9.95001C9.70001 9.85005 9.70001 9.74999 9.60005 9.65002C9.49998 9.65002 9.29996 9.54996 9.2 9.54996C9.10004 9.54996 8.99997 9.54996 8.90001 9.54996L8.99997 9.24997L11.5 8.85003H11.9ZM11.5 5.25C11.8 5.25 12.1 5.35 12.3 5.55C12.5 5.75 12.6 6.04999 12.6 6.35C12.6 6.65 12.5 6.85 12.3 7.15C12.1 7.35 11.8 7.45 11.5 7.45C11.2 7.45 11 7.35 10.8 7.15C10.6 6.95 10.5 6.65 10.5 6.35C10.5 6.04999 10.6 5.85 10.8 5.55C10.9001 5.35 11.2 5.25 11.5 5.25Z' fill='%2387B9D7'/%3E%3C/svg%3E%0A");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+@media screen and (max-width: 768px) {
+  .calculation {
+    display: block;
+  }
+
+  .info {
+    padding-left: 0;
+  }
+
+  .depositParameters {
+    margin-bottom: 50px;
+  }
+
+  .depositImage {
+    display: block;
+    width: 290px;
+    height: 182px;
+    margin-right: auto;
+    margin-left: auto;
+
+    object-fit: contain;
+    object-position: initial;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .depositParameters {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .parameter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+}
+
+@media screen and (max-width: 370px) {
+  .depositImage {
+    width: 100%;
+    height: auto;
+
+    object-fit: initial;
+  }
+
+  .title {
+    text-align: center;
+  }
+}

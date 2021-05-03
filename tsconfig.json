@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "strictNullChecks": true,
+    "outDir": "./build/",
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "module": "es6",
+    "target": "es6",
+    "jsx": "react",
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    "paths": {
+      "caComponents/*": [
+        "src/components/*"
+      ],
+      "caTypes": [
+        "src/types/"
+      ],
+      "caStore/*": [
+        "src/store/*"
+      ],
+    },
+    "lib": [
+      "dom",
+      "es6",
+      "dom.iterable",
+      "scripthost",
+      "esnext.array"
+    ],
+  },
+
+  "exclude": [
+    "node_modules/@types/react/",
+    "node_modules/**/*",
+    "**/*.spec.ts"
+  ]
+}

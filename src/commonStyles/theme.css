@@ -1,0 +1,14 @@
+:root {
+    --text_black: #000000;
+    --text_gray: #7E878E;
+    --text_gray-light: #7C878E;
+
+    --background_blue-gray-light: #F1F5F7;
+    --background_white: #fff;
+
+    --border-blue-light: #B4D6EC; 
+    
+
+    --desktop-width: 980px;
+    --desktop-padding: 29px;
+}

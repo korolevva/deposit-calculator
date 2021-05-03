@@ -1,0 +1,17 @@
+@font-face {
+    font-style: normal;
+    font-weight: 400;
+    font-family: "PF Din Text Cond Pro";
+
+    font-display: swap;
+    src: url("../assets/fonts/PFDinTextCondPro.woff2") format("woff2"), url("../assets/fonts/PFDinTextCondPro.woff") format("woff");
+}
+
+@font-face {
+    font-style: normal;
+    font-weight: 500;
+    font-family: "PF Din Text Cond Pro";
+
+    font-display: swap;
+    src: url("../assets/fonts/PFDinTextCondPro500.woff2") format("woff2"), url("../assets/fonts/PFDinTextCondPro500.woff") format("woff");
+}
