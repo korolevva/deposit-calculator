@@ -1,66 +1,86 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import style from './AppContainer.css';
-import { Select } from 'antd';
-import { Slider } from 'antd';
+import { Select, Slider, Spin } from 'antd';
 import { observer } from 'mobx-react';
-import { Spin } from 'antd';
 import { Deposit } from 'src/types';
 import { mockDeposits } from '../../mock/mockDeposits';
-import { calculateIncome, toLocalDecimalString, transformDeposits } from 'caComponents/utils';
+import { calculateIncome, generatePDF, toLocalDecimalString, transformDeposits } from 'caComponents/utils';
 import { InfoBadge } from 'caComponents/InfoBadge/InfoBadge';
+import cx from 'classnames';
 
 const { Option } = Select;
+
 const deposits: Deposit[] = transformDeposits(mockDeposits);
+export const MAX_PERIOD = 365;
+export const MAX_DEPOSIT_SUMM = 1000000000;
+const Step = {
+    PERIOD: 1,
+    SUMM: 500,
+};
 
 const AppContainer = ({ isFetching = false }) => {
-    const [selectedDeposit, setSelectedDeposit] = useState(deposits[0]);
-    const [periodFrom, setPeriodFrom] = useState(selectedDeposit.minPeriodFrom);
-    const [summ, setSumm] = useState(selectedDeposit.param[0].minSummFrom);
-    const [rate, setRate] = useState(selectedDeposit.param[0].summsAndRate[0].rate);
-    const [income, setIncome] = useState(calculateIncome(periodFrom, summ, rate));
+    let deposit = deposits[0];
+    const initialDeposit = {
+        periodFrom: deposit.minPeriodFrom,
+        summ: deposit.param[0].minSummFrom,
+        rate: deposit.param[0].summsAndRate[0].rate,
+    };
+    const [selectedDeposit, setSelectedDeposit] = useState(initialDeposit);
+
+    const [income, setIncome] = useState(
+        calculateIncome(selectedDeposit.periodFrom, selectedDeposit.summ, selectedDeposit.rate),
+    );
 
     const calculateHandler = (period: number, summ: number) => {
-        const foundParam = selectedDeposit.param.find(
+        const foundParam = deposit.param.find(
             (parameter) => period >= parameter.periodFrom && period <= parameter.periodTo,
         );
         const summAndRate = foundParam?.summsAndRate.find(
             (parameter) => summ >= parameter.summFrom && summ <= parameter.summTo,
         );
 
-        const rate = summAndRate?.rate;
-        if (rate) {
-            setRate(rate);
+        const newRate = summAndRate?.rate;
+        if (newRate) {
+            setSelectedDeposit({ ...selectedDeposit, rate: newRate });
         }
-        setIncome(calculateIncome(periodFrom, summ, rate));
+        const newIncome = calculateIncome(selectedDeposit.periodFrom, summ, newRate);
+        setIncome(newIncome);
     };
 
+    useEffect(() => {
+        const { periodFrom, summ } = selectedDeposit;
+        calculateHandler(periodFrom, summ);
+    }, [selectedDeposit.summ, selectedDeposit.periodFrom]);
+
     const selectChangeHandler = (code: string) => {
-        const selectedDeposit = deposits?.find((deposit) => deposit.code === code);
-        if (selectedDeposit) {
-            setSelectedDeposit(selectedDeposit);
-            setPeriodFrom(selectedDeposit.minPeriodFrom);
-            setSumm(selectedDeposit.param[0].minSummFrom);
-            setRate(selectedDeposit.param[0].summsAndRate[0].rate);
-            setIncome(
-                calculateIncome(
-                    selectedDeposit.minPeriodFrom,
-                    selectedDeposit.param[0].minSummFrom,
-                    selectedDeposit.param[0].summsAndRate[0].rate,
-                ),
+        const newSelectedDeposit = deposits?.find((deposit) => deposit.code === code);
+        if (newSelectedDeposit) {
+            deposit = newSelectedDeposit;
+            setSelectedDeposit(initialDeposit);
+            const newIncome = calculateIncome(
+                newSelectedDeposit.minPeriodFrom,
+                newSelectedDeposit.param[0].minSummFrom,
+                newSelectedDeposit.param[0].summsAndRate[0].rate,
             );
+            setIncome(newIncome);
         }
     };
 
     const periodChangeHandler = (period: number) => {
-        setPeriodFrom(period);
-        calculateHandler(period, summ);
+        setSelectedDeposit({ ...selectedDeposit, periodFrom: period });
     };
 
     const sumChangeHandler = (summ: number) => {
-        setSumm(summ);
-        calculateHandler(periodFrom, summ);
+        setSelectedDeposit({ ...selectedDeposit, summ });
     };
 
+    const saveToPdfClickHandler = () => {
+        const { periodFrom, summ, rate } = selectedDeposit;
+        const { name } = deposit;
+        generatePDF(name, periodFrom, summ, rate, income);
+    };
+    const { periodFrom, summ, rate } = selectedDeposit;
+    const { minPeriodFrom } = deposit;
     return (
         <div className={style.container}>
             <h1 className={style.title}>Депозитный калькулятор</h1>
@@ -89,15 +109,15 @@ const AppContainer = ({ isFetching = false }) => {
                                         <span className={style.legendValue}>{`${periodFrom} д`}</span>
                                     </div>
                                     <Slider
-                                        min={selectedDeposit.minPeriodFrom}
-                                        max={365}
-                                        step={1}
+                                        min={minPeriodFrom}
+                                        max={MAX_PERIOD}
+                                        step={Step.PERIOD}
                                         value={periodFrom}
                                         tooltipVisible={false}
                                         onChange={periodChangeHandler}
                                     />
                                     <div className={style.extraInfo}>
-                                        <InfoBadge title="Тooltip 1" text="Text of tooltip 1" />
+                                        <InfoBadge title="Tooltip 1" text="Text of tooltip 1" />
                                     </div>
                                 </div>
                                 <div className={style.range}>
@@ -106,30 +126,30 @@ const AppContainer = ({ isFetching = false }) => {
                                         <span className={style.legendValue}>{`${toLocalDecimalString(summ)} Р`}</span>
                                     </div>
                                     <Slider
-                                        min={selectedDeposit.param[0].minSummFrom}
-                                        max={1000000000}
-                                        step={1}
+                                        min={deposit.param[0].minSummFrom}
+                                        max={MAX_DEPOSIT_SUMM}
+                                        step={Step.SUMM}
                                         value={summ}
                                         tooltipVisible={false}
                                         onChange={sumChangeHandler}
                                     />
                                     <div className={style.extraInfo}>
-                                        <InfoBadge title="Тooltip 2" text="Text of tooltip 2" />
+                                        <InfoBadge title="Tooltip 2" text="Text of tooltip 2" />
                                     </div>
                                 </div>
                             </div>
                             <ul className={style.depositParameters}>
-                                <li className={style.parameter}>
+                                <li className={cx(style.parameter, style.rate)}>
                                     <span className={style.parametrName}>Процентная ставка</span>
                                     <span className={style.parametrValue}>{`${toLocalDecimalString(rate, 1)}%`}</span>
                                 </li>
-                                <li className={style.parameter}>
+                                <li className={cx(style.parameter, style.summ)}>
                                     <span className={style.parametrName}>{`Сумма через ${periodFrom} д`}</span>
                                     <span className={style.parametrValue}>
                                         {`${toLocalDecimalString(income + summ, 2)} Р`}
                                     </span>
                                 </li>
-                                <li className={style.parameter}>
+                                <li className={cx(style.parameter, style.income)}>
                                     <span className={style.parametrName}>Доход</span>
                                     <span className={style.parametrValue}>
                                         {`${toLocalDecimalString(income, 2)} Р`}
@@ -157,6 +177,9 @@ const AppContainer = ({ isFetching = false }) => {
                                 процентные ставки, действующие на момент проведения расчетов.
                             </p>
                         </div>
+                        <button className={style.saveToPdfBtn} onClick={saveToPdfClickHandler}>
+                            Сохранить в PDF
+                        </button>
                     </section>
                 )}
             </Spin>

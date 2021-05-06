@@ -80,7 +80,22 @@ span[class="ant-select-selection-item"] {
 
 .depositParameters {
   display: flex;
-  justify-content: space-between;
+}
+
+.parameter {
+  width: auto;
+}
+
+.rate {
+  width: 25%;
+}
+
+.summ {
+  width: 40%;
+}
+
+.income {
+  width: 35%;
 }
 
 .parametrName {
@@ -136,6 +151,16 @@ span[class="ant-select-selection-item"] {
   background-image: url("data:image/svg+xml,%3Csvg width='21' height='21' viewBox='0 0 21 21' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M0 10.5C0 4.70101 4.70101 0 10.5 0C16.299 0 21 4.70102 21 10.5C21 16.299 16.299 21 10.5 21C4.70102 21 0 16.299 0 10.5ZM10.5 2.1C5.86081 2.1 2.1 5.86081 2.1 10.5C2.1 15.1392 5.86081 18.9 10.5 18.9C15.1392 18.9 18.9 15.1392 18.9 10.5C18.9 5.86081 15.1392 2.1 10.5 2.1Z' fill='%2387B9D7'/%3E%3Cpath d='M11.9 8.85003L10.4 14.05C10.3 14.35 10.3 14.55 10.3 14.65C10.3 14.75 10.3 14.75 10.4 14.75C10.5 14.75 10.5 14.85 10.5 14.85C10.6 14.85 10.7 14.85 10.7 14.75C10.9001 14.55 11.2 14.25 11.5 13.75L11.7 13.85C11 15.15 10.2 15.75 9.40002 15.75C9.10004 15.75 8.80005 15.65 8.69999 15.45C8.49996 15.25 8.4 15.05 8.4 14.75C8.4 14.55 8.4 14.35 8.49996 14.05L9.49998 10.55C9.60005 10.35 9.70001 10.15 9.70001 9.95001C9.70001 9.85005 9.70001 9.74999 9.60005 9.65002C9.49998 9.65002 9.29996 9.54996 9.2 9.54996C9.10004 9.54996 8.99997 9.54996 8.90001 9.54996L8.99997 9.24997L11.5 8.85003H11.9ZM11.5 5.25C11.8 5.25 12.1 5.35 12.3 5.55C12.5 5.75 12.6 6.04999 12.6 6.35C12.6 6.65 12.5 6.85 12.3 7.15C12.1 7.35 11.8 7.45 11.5 7.45C11.2 7.45 11 7.35 10.8 7.15C10.6 6.95 10.5 6.65 10.5 6.35C10.5 6.04999 10.6 5.85 10.8 5.55C10.9001 5.35 11.2 5.25 11.5 5.25Z' fill='%2387B9D7'/%3E%3C/svg%3E%0A");
   background-repeat: no-repeat;
   background-position: center;
+}
+
+.saveToPdfBtn {
+  width: 140px;
+  height: 50px;
+  border: 1px solid var(--border-blue-light);
+  background-color: var(--background_white);
+  border-radius: 3px;
+  color: var(--text_gray-light);
+  cursor: pointer;
 }
 
 @media screen and (max-width: 768px) {
