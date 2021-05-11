@@ -22,6 +22,9 @@
       "caStore/*": [
         "src/store/*"
       ],
+      "caScreens/*": [
+        "src/screens/*"
+      ],
     },
     "lib": [
       "dom",

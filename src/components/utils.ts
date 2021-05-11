@@ -2,7 +2,7 @@ import { Deposit, DepositAPI, Parameter, ParameterAPI, SummsAndRate, SummsAndRat
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import { TDocumentDefinitions } from 'pdfmake/interfaces';
-import { MAX_DEPOSIT_SUMM, MAX_PERIOD } from './AppContainer/AppContainer';
+import { MAX_DEPOSIT_SUMM, MAX_PERIOD } from './AppContainer/constants';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 const transformSummAndRate = (summsAndRate: SummsAndRateAPI[]) => {

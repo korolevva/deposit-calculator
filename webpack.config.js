@@ -87,6 +87,7 @@ const config = {
             caTypes: path.resolve(__dirname, 'src/types/'),
             caComponents: path.resolve(__dirname, 'src/components/'),
             caStore: path.resolve(__dirname, 'src/store/'),
+            caScreens: path.resolve(__dirname, 'src/screens/'),
         },
     },
 
